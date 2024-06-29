@@ -1,0 +1,46 @@
+MyToken Smart Contract
+This is a simple ERC-20 token implementation written in Solidity, with a focus on error handling mechanisms: revert, assert, and require.
+
+License:
+
+MIT
+
+Solidity Version:
+
+0.8.7
+
+Error Handling:
+
+The contract utilizes three primary mechanisms for error handling:
+
+revert: This is the most common approach used for validating user input, function arguments, and ensuring state consistency. When a revert statement is encountered in a function, the entire transaction is reverted, undoing all changes made within that function call and its subcalls. This ensures the contract remains in a valid state.
+require: Similar to revert, require throws an exception and reverts the transaction if the provided condition is not met. However, require offers the option to include a custom error message, which can be helpful for debugging and providing informative feedback to users.
+assert: This is typically used for internal error checking and assumptions that should always hold true. If an assert statement fails, it indicates a logical error within the contract itself and reverts the transaction.
+Solidity Version:
+
+0.8.7
+
+Contract Breakdown:
+
+Constructor: Sets the contract owner to the address that deploys the contract.
+Variables:
+name: Public string variable representing the token name ("milan").
+symbol: Public string variable representing the token symbol ("mil").
+totalSupply: Public uint variable representing the total supply of tokens (initially 0).
+owner: Public address variable storing the address of the contract owner.
+balances: Public mapping that stores the balance of each address.
+Events:
+Mint: Emitted when tokens are minted.
+Burn: Emitted when tokens are burned.
+Transfer: Emitted when tokens are transferred between accounts.
+Error:
+InsufficientBalance: Custom error thrown when attempting to burn more tokens than the address holds (uses revert).
+Modifiers:
+onlyOwner: Ensures only the contract owner can call a function. Uses assert to verify the sender is the owner.
+Functions:
+mint(address, uint) (onlyOwner): Mints a specified amount of tokens to a given address. Uses require to ensure the caller is the owner.
+burn(address, uint) (onlyOwner): Burns a specified amount of tokens from a given address. Uses revert with a custom error (InsufficientBalance) if the address has insufficient balance.
+transfer(address, uint): Transfers tokens from the sender to a recipient address. Uses require to ensure the sender has enough balance for the transfer.
+Deployment and Usage:
+
+This code provides a basic ERC-20 token implementation. You can deploy it to a blockchain network compatible with Solidity and interact with it using web3 or other Ethereum development tools. Refer to the specific documentation for your chosen development framework for deployment and interaction instructions.
